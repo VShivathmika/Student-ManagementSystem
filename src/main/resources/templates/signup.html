@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body class="d-flex justify-content-center align-items-center" style="height:100vh; background: #f0e6f6;">
+
+<div class="card shadow p-4" style="width:400px;">
+    <h3 class="text-center">Signup</h3>
+
+    <form id="signupForm">
+
+        <div class="mb-3">
+            <label>Name</label>
+            <input id="name" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input id="email" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input id="password" type="password" class="form-control">
+        </div>
+
+        <button type="button" class="btn btn-success w-100" onclick="signup()">Create Account</button>
+    </form>
+
+</div>
+
+<script>
+async function signup() {
+    const payload = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+    });
+
+    alert("Signup successful! Please login.");
+    window.location.href = "/login";
+}
+</script>
+
+</body>
+</html>

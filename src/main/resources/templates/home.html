@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Student Management</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f0e5d8, #e3d5ca);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-card">
+        <p class="fs-1 fw-bold">Welcome Admin 👋</p>
+        <p class="fs-5 mb-4">Choose an action below</p>
+
+        <div class="d-flex flex-column gap-3">
+
+            <a th:href="@{/students}" class="home-btn">📘 View All Students</a>
+
+            <a th:href="@{/studentform}" class="home-btn">➕ Add New Student</a>
+
+
+            <a th:href="@{/logout}" class="home-btn">🚪 Logout</a>
+
+        </div>
+    </div>
+
+    <!-- Floating particles -->
+    <script>
+        const body = document.body;
+        const colors = ['#fbc4ab','#ffd6a5','#c5d86d','#a492c2','#f6a5c0'];
+
+        for (let i = 0; i < 25; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            let size = Math.random() * 20 + 10;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particle.style.opacity = Math.random() * 0.3 + 0.1;
+            body.appendChild(particle);
+        }
+
+        // GSAP animation for entrance
+        gsap.from(".glass-card", { duration: 1.5, y: -100, opacity: 0, ease: "bounce.out" });
+    </script>
+
+</body>
+</html>
